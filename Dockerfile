@@ -8,7 +8,7 @@ RUN (yum -y update; \
      yum -y autoremove; \
      yum clean all;)
 
-RUN curl "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz" | tar -C /usr/local/ -xz | ln -s /usr/local/hadoop-$HADOOP_VERSION/ /usr/local/hadoop
+RUN curl "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" | tar -C /usr/local/ -xz | ln -s /usr/local/hadoop-$HADOOP_VERSION/ /usr/local/hadoop
 
 ADD java_home.sh /etc/profile.d/java_home.sh
 ADD hadoop_home.sh /etc/profile.d/hadoop_home.sh
