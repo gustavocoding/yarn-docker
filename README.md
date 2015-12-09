@@ -9,7 +9,7 @@ Quick start
 To create a 3 node YARN cluster, run:
 
 ```
-bash <(curl -s https://raw.githubusercontent.com/gustavonalle/docker/master/yarn/cluster.sh)
+bash <(curl -s https://raw.githubusercontent.com/gustavonalle/yarn-docker/master/cluster.sh)
 ```
 
 
@@ -24,7 +24,7 @@ Run the script cluster/cluster.sh passing the number of slaves:
 After the container creation the script will print the master ip address.
 
 http://master:50070 for the HDFS console
-http://master: 8088 for the YARN UI
+http://master:8088 for the YARN UI
 
 
 Details
