@@ -18,6 +18,7 @@ ADD core-site.xml /usr/local/hadoop/etc/hadoop/core-site.xml
 ADD hdfs-site.xml /usr/local/hadoop/etc/hadoop/hdfs-site.xml
 ADD mapred-site.xml /usr/local/hadoop/etc/hadoop/mapred-site.xml
 ADD yarn-site.xml /usr/local/hadoop/etc/hadoop/yarn-site.xml
+ADD start-all.sh usr/local/hadoop/sbin/
 
 USER root
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
