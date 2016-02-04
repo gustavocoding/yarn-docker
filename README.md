@@ -30,6 +30,6 @@ http://master:8088 for the YARN UI
 Details
 ---
 
-Each container is based on fedora 21, java 1.8. 
+Each container is based on Alpine Linux and OpenJDK 1.8. 
 The master container will run the namenode, secondary namenode, and the resource manager. 
 Each slave container will run the data node and the node manager. 

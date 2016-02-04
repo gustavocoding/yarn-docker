@@ -12,6 +12,8 @@ do
    docker run -d --link master:master -h slave$c gustavonalle/yarn
 done
 
+sleep 10
+
 docker exec -it master sh -c -l '/usr/local/hadoop/sbin/start-wrapper.sh'
 
 echo  "Cluster started. HDFS UI on http://master:50070/dfshealth.html#tab-datanode"

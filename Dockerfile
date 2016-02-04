@@ -1,14 +1,14 @@
-FROM fedora:21
+FROM alpine:3.3 
 MAINTAINER gustavonalle
 
 ENV HADOOP_VERSION 2.7.1
 
-RUN (yum -y update; \
-     yum -y install words ruby supervisor iputils iproute openssh-clients net-tools openssh-server tar unzip java-1.8.0-openjdk-devel; \
-     yum -y autoremove; \
-     yum clean all;)
+RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk add --update \
+    curl openjdk8 openssh ruby bash cracklib-words supervisor procps \
+    && rm /var/cache/apk/*
 
-RUN curl "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" | tar -C /usr/local/ -xz | ln -s /usr/local/hadoop-$HADOOP_VERSION/ /usr/local/hadoop
+RUN curl "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" | tar -C /usr/local/ -xz | ln -s /usr/local/hadoop-$HADOOP_VERSION/ /usr/local/hadoop && rm -Rf /usr/local/hadoop/share/doc/
 
 ADD java_home.sh /etc/profile.d/java_home.sh
 ADD hadoop_home.sh /etc/profile.d/hadoop_home.sh
@@ -30,8 +30,8 @@ ADD ssh_config /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
 RUN chown root:root /root/.ssh/config
 
-RUN sed -i -e 's/JAVA=\$JAVA_HOME\/bin\/java/JAVA=\/usr\/lib\/jvm\/java-openjdk/' /usr/local/hadoop/etc/hadoop/yarn-env.sh
-RUN sed -i -e 's/export JAVA_HOME=${JAVA_HOME}/JAVA_HOME=\/usr\/lib\/jvm\/java-openjdk/' /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+RUN sed -i -e 's/JAVA=\$JAVA_HOME\/bin\/java/JAVA=\/usr\/lib\/jvm\/default-jvm/' /usr/local/hadoop/etc/hadoop/yarn-env.sh
+RUN sed -i -e 's/export JAVA_HOME=${JAVA_HOME}/JAVA_HOME=\/usr\/lib\/jvm\/default-jvm/' /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 
 RUN /bin/bash -l -c "hdfs namenode -format"
 

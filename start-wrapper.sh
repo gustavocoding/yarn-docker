@@ -1,4 +1,6 @@
-IP=$(ip a s | sed -ne '/127.0.0.1/!{s/^[ \t]*inet[ \t]*\([0-9.]\+\)\/.*$/\1/p}')
+#!/bin/bash
+
+IP=$(ip addr list eth0 |grep "inet " |cut -d' ' -f6|cut -d/ -f1)
 truncate -s 0 /usr/local/hadoop/etc/hadoop/slaves
 sed -i s/namenode/$IP/g /usr/local/hadoop/etc/hadoop/core-site.xml
 sed -i s/localhost/$IP/g /usr/local/hadoop/etc/hadoop/yarn-site.xml
