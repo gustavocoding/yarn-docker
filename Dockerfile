@@ -1,7 +1,7 @@
 FROM alpine:3.3 
 MAINTAINER gustavonalle
 
-ENV HADOOP_VERSION 2.7.1
+ENV HADOOP_VERSION 2.7.2
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk add --update \
