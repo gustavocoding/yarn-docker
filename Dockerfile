@@ -1,14 +1,13 @@
-FROM alpine:3.3 
+FROM alpine:3.4
 MAINTAINER gustavonalle
 
 ENV HADOOP_VERSION 2.7.1
 
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk add --update \
+RUN apk add --update \
     curl openjdk8 openssh ruby bash cracklib-words supervisor procps \
     && rm /var/cache/apk/*
 
-RUN curl "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" | tar -C /usr/local/ -xz | ln -s /usr/local/hadoop-$HADOOP_VERSION/ /usr/local/hadoop && rm -Rf /usr/local/hadoop/share/doc/
+RUN curl "https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" | tar -C /usr/local/ -xz | ln -s /usr/local/hadoop-$HADOOP_VERSION/ /usr/local/hadoop && rm -Rf /usr/local/hadoop/share/doc/
 
 ADD hadoop_home.sh /etc/profile.d/hadoop_home.sh
 
