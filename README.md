@@ -23,8 +23,9 @@ Run the script cluster/cluster.sh passing the number of slaves:
 
 After the container creation the script will print the master ip address.
 
-http://master:50070 for the HDFS console
-http://master:8088 for the YARN UI
+
+http://master:9870/dfshealth.html#tab-datanode for the HDFS console
+http://master:8088/cluster/nodes for the YARN UI
 
 
 Details
