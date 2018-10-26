@@ -4,7 +4,7 @@ MAINTAINER gustavonalle
 ENV HADOOP_VERSION 3.1.1
 
 RUN apk add --update \
-    curl openjdk8 openssh ruby bash cracklib-words supervisor procps \
+    findutils curl openjdk8 openssh ruby bash cracklib-words supervisor procps \
     && rm /var/cache/apk/*
 
 RUN sed -i -e "s/bin\/ash/bin\/bash/" /etc/passwd
